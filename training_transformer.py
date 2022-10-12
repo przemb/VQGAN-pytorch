@@ -12,7 +12,8 @@ from utils import load_data, plot_images
 
 class TrainTransformer:
     def __init__(self, args):
-        self.model = VQGANTransformer(args).to(device=args.device)
+        self.model = nn.DataParallel(VQGANTransformer(args))
+        self.model.to(device=args.device)
         self.optim = self.configure_optimizers()
 
         self.train(args)
@@ -90,7 +91,7 @@ if __name__ == '__main__':
     parser.add_argument('--sos-token', type=int, default=0, help='Start of Sentence token.')
 
     args = parser.parse_args()
-    args.dataset_path = r"C:\Users\dome\datasets\flowers"
+    args.dataset_path = r"/home/dock/workspace/datasets/102flowers"
     args.checkpoint_path = r".\checkpoints\vqgan_last_ckpt.pt"
 
     train_transformer = TrainTransformer(args)
