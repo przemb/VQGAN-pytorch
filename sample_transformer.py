@@ -32,7 +32,7 @@ parser.add_argument('--pkeep', type=float, default=0.5, help='Percentage for how
 parser.add_argument('--sos-token', type=int, default=0, help='Start of Sentence token.')
 
 args = parser.parse_args()
-args.dataset_path = r"C:\Users\dome\datasets\flowers"
+args.dataset_path = r"/home/dock/workspace/datasets/102flowers"
 args.checkpoint_path = r".\checkpoints\vqgan_last_ckpt.pt"
 
 n = 100
