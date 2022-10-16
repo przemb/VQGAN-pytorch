@@ -78,7 +78,7 @@ if __name__ == '__main__':
     parser.add_argument('--checkpoint-path', type=str, default='./checkpoints/last_ckpt.pt', help='Path to checkpoint.')
     parser.add_argument('--device', type=str, default="cuda", help='Which device the training is on')
     parser.add_argument('--batch-size', type=int, default=40, help='Input batch size for training.')
-    parser.add_argument('--epochs', type=int, default=50, help='Number of epochs to train.')
+    parser.add_argument('--epochs', type=int, default=30, help='Number of epochs to train.')
     parser.add_argument('--learning-rate', type=float, default=2.25e-05, help='Learning rate.')
     parser.add_argument('--beta1', type=float, default=0.5, help='Adam beta param.')
     parser.add_argument('--beta2', type=float, default=0.9, help='Adam beta param.')
