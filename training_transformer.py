@@ -23,7 +23,7 @@ class TrainTransformer:
         whitelist_weight_modules = (nn.Linear, )
         blacklist_weight_modules = (nn.LayerNorm, nn.Embedding)
 
-        for mn, m in self.model.transformer.named_modules():
+        for mn, m in self.model.module.transformer.named_modules():
             for pn, p in m.named_parameters():
                 fpn = f"{mn}.{pn}" if mn else pn
 
@@ -38,7 +38,7 @@ class TrainTransformer:
 
         no_decay.add("pos_emb")
 
-        param_dict = {pn: p for pn, p in self.model.transformer.named_parameters()}
+        param_dict = {pn: p for pn, p in self.model.module.transformer.named_parameters()}
 
         optim_groups = [
             {"params": [param_dict[pn] for pn in sorted(list(decay))], "weight_decay": 0.01},
@@ -77,8 +77,8 @@ if __name__ == '__main__':
     parser.add_argument('--dataset-path', type=str, default='./data', help='Path to data.')
     parser.add_argument('--checkpoint-path', type=str, default='./checkpoints/last_ckpt.pt', help='Path to checkpoint.')
     parser.add_argument('--device', type=str, default="cuda", help='Which device the training is on')
-    parser.add_argument('--batch-size', type=int, default=20, help='Input batch size for training.')
-    parser.add_argument('--epochs', type=int, default=100, help='Number of epochs to train.')
+    parser.add_argument('--batch-size', type=int, default=40, help='Input batch size for training.')
+    parser.add_argument('--epochs', type=int, default=50, help='Number of epochs to train.')
     parser.add_argument('--learning-rate', type=float, default=2.25e-05, help='Learning rate.')
     parser.add_argument('--beta1', type=float, default=0.5, help='Adam beta param.')
     parser.add_argument('--beta2', type=float, default=0.9, help='Adam beta param.')
@@ -92,7 +92,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
     args.dataset_path = r"/home/dock/workspace/datasets/102flowers"
-    args.checkpoint_path = r".\checkpoints\vqgan_last_ckpt.pt"
+    args.checkpoint_path = r"./checkpoints/vqgan_epoch_28.pt"
 
     train_transformer = TrainTransformer(args)
 

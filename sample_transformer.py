@@ -33,7 +33,7 @@ parser.add_argument('--sos-token', type=int, default=0, help='Start of Sentence 
 
 args = parser.parse_args()
 args.dataset_path = r"/home/dock/workspace/datasets/102flowers"
-args.checkpoint_path = r".\checkpoints\vqgan_last_ckpt.pt"
+args.checkpoint_path = r"./checkpoints/vqgan_epoch_28.pt"
 
 n = 100
 transformer = VQGANTransformer(args).to("cuda")
